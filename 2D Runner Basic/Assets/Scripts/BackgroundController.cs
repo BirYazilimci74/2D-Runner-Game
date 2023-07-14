@@ -20,7 +20,8 @@ public class BackgroundController : MonoBehaviour
         //Bir arkaplan cameradan çıktığında boyutunun 2 katı kadar ileri git.
         if (transform.position.x <= -19)
         {
-            transform.Translate(Vector3.right * transform.localScale.x * 2f);
+            BoxCollider2D collider2D = GetComponent<BoxCollider2D>();
+            transform.Translate(Vector3.right * collider2D.size.y * 2);
         }
     }
 }

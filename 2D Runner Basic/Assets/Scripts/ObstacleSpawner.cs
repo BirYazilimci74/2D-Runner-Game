@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -6,12 +7,18 @@ public class ObstacleSpawner : MonoBehaviour
     [SerializeField] private GameObject[] obstacles; // Oluşturulacak engel prefab'ları
     
     public float spawnInterval; // Engel oluşturma aralığı
-    public float obstacleSpeed; // Engel hareket hızı
-    
+
+    private ObstacleController obstacleController;
     private float intervalDecreaseAmount = 0.1f; // Her spawn işleminden sonra azaltılacak aralık miktarı
+    private float speedDecreaseAmount = 0.1f;
     private float spawnTimer = 0f;
     private int i = 0;
-    
+
+    private void Start()
+    {
+        obstacleController = FindObjectOfType<ObstacleController>();
+    }
+
     private void Update()
     {
         spawnTimer += Time.deltaTime;
@@ -25,8 +32,8 @@ public class ObstacleSpawner : MonoBehaviour
             if (i%5 == 0)
             {
                 spawnInterval -= intervalDecreaseAmount;
+                obstacleController.obstacleSpeed += speedDecreaseAmount;
             }
-
             if (spawnInterval < 2f)
             {
                 spawnInterval = 2f;
@@ -39,12 +46,8 @@ public class ObstacleSpawner : MonoBehaviour
     {
         int randomIndex = Random.Range(0, obstacles.Length);
         GameObject obstacle = obstacles[randomIndex];
-
-        // Engel oluşturma kodu buraya gelecek
-        // Örneğin:
+        
         GameObject newObstacle = Instantiate(obstacle, transform.position, Quaternion.identity);
-        Rigidbody2D obstacleRb = newObstacle.GetComponent<Rigidbody2D>();
-        obstacleRb.velocity = new Vector2(-obstacleSpeed, 0f);
     }
 
 }
