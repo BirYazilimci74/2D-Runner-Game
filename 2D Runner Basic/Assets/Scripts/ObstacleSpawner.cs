@@ -8,6 +8,7 @@ public class ObstacleSpawner : MonoBehaviour
     
     public float spawnInterval; // Engel oluşturma aralığı
 
+    private GameManager gameManager;
     private ObstacleController obstacleController;
     private float intervalDecreaseAmount = 0.1f; // Her spawn işleminden sonra azaltılacak aralık miktarı
     private float speedDecreaseAmount = 0.1f;
@@ -16,11 +17,16 @@ public class ObstacleSpawner : MonoBehaviour
 
     private void Start()
     {
+        gameManager = FindObjectOfType<GameManager>();
         obstacleController = FindObjectOfType<ObstacleController>();
     }
 
     private void Update()
     {
+        if (!gameManager.canPlay)
+        {
+            return;
+        }
         spawnTimer += Time.deltaTime;
 
         if (spawnTimer >= spawnInterval)

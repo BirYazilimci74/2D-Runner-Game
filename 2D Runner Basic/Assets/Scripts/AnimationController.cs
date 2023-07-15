@@ -11,13 +11,6 @@ public class AnimationController : MonoBehaviour
         for (int i = 0; i < players.transform.childCount; i++)
         {
             playerAnimator[i] = players.transform.GetChild(i).GetComponent<Animator>();
-            Debug.Log("Eklendi");
-        }
-
-        //Koşmaya Başla
-        foreach (var animator in playerAnimator)
-        {
-            animator.SetBool("isStart", true);
         }
     }
     
@@ -28,7 +21,22 @@ public class AnimationController : MonoBehaviour
             animator.SetBool("Jump",con);
         }
     }
-    
+
+    public void GameStart(bool con)
+    {
+        foreach (var animator in playerAnimator)
+        {
+            animator.SetBool("isStart", con);
+        }
+    }
+
+    public void Death()
+    {
+        foreach (var animator in playerAnimator)
+        {
+            animator.SetTrigger("Death");
+        }
+    }
     
     
 }

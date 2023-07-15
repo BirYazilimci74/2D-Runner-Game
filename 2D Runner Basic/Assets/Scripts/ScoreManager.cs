@@ -6,11 +6,13 @@ public class ScoreManager : MonoBehaviour
     [SerializeField] private TMP_Text scoreText;
     [SerializeField] private TMP_Text highScoreText;
 
-    private float score;
+    private GameManager gameManager;
     private float highScore;
+    private float score;
 
     void Start()
     {
+        gameManager = FindObjectOfType<GameManager>();
         score = 0f;  // Oyun başında skoru sıfırla
         highScore = PlayerPrefs.GetFloat("HighScore", 0f);  // Kaydedilen en yüksek skoru yükle
 
@@ -20,6 +22,10 @@ public class ScoreManager : MonoBehaviour
 
     void Update()
     {
+        if (!gameManager.canPlay)
+        {
+            return;
+        }
         Score();
     }
 

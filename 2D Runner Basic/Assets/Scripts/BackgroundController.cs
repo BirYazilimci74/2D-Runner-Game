@@ -4,8 +4,19 @@ public class BackgroundController : MonoBehaviour
 {
     [SerializeField] private float backgroundSpeed;
 
+    private GameManager gameManager;
+
+    private void Start()
+    {
+        gameManager = FindObjectOfType<GameManager>();
+    }
+
     private void Update()
     {
+        if (!gameManager.canPlay)
+        {
+            return;
+        }
         Move();
         BackgroundRepeat();
     }
