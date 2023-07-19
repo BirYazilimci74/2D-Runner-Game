@@ -7,6 +7,7 @@ public class PlayerController : MonoBehaviour
     private GameManager gameManager;
     private AnimationController animationController;
     private bool canJump = true; // Zıplama yeteneği
+    private Touch touch;
 
     private void Awake()
     {
@@ -20,11 +21,23 @@ public class PlayerController : MonoBehaviour
         {
             return;
         }
+
+        if (Input.touchCount > 0)
+        {
+            touch = Input.GetTouch(0);
+            if (touch.phase == TouchPhase.Began)
+            {
+                Jump();
+            }
+        }
+        
         if ((Input.GetKeyDown(KeyCode.UpArrow) || Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.Space)) && canJump)
         {
             Jump();
         }
     }
+    
+    
 
     private void Jump()
     {
