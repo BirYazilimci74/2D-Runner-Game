@@ -4,10 +4,13 @@ using Random = UnityEngine.Random;
 
 public class ObstacleSpawner : MonoBehaviour
 {
-    [SerializeField] private GameObject[] obstacles; // Oluşturulacak engel prefab'ları
+    //[SerializeField] private GameObject[] obstacles; // Oluşturulacak engel prefab'ları
+    [SerializeField] private GameObject typeOfObstacle;
+    [SerializeField] private GameObject[] _1obstacles;
+    
     
     public float spawnInterval; // Engel oluşturma aralığı
-
+    
     private GameManager gameManager;
     private ObstacleController obstacleController;
     private float intervalDecreaseAmount = 0.1f; // Her spawn işleminden sonra azaltılacak aralık miktarı
@@ -17,6 +20,11 @@ public class ObstacleSpawner : MonoBehaviour
 
     private void Start()
     {
+        _1obstacles = new GameObject[typeOfObstacle.transform.childCount];
+        for (int j = 0; j < typeOfObstacle.transform.childCount; j++)
+        {
+            _1obstacles[j] = typeOfObstacle.transform.GetChild(j).gameObject;
+        }
         gameManager = FindObjectOfType<GameManager>();
         obstacleController = FindObjectOfType<ObstacleController>();
     }
@@ -50,10 +58,18 @@ public class ObstacleSpawner : MonoBehaviour
 
     private void SpawnObstacle()
     {
-        int randomIndex = Random.Range(0, obstacles.Length);
-        GameObject obstacle = obstacles[randomIndex];
+        //GameObject obstacle = obstacles[randomIndex];
+        for (int j = 0; j < typeOfObstacle.transform.childCount; j++)
+        {
+            if (_1obstacles[j].activeSelf)
+            {
+                int randomIndex = Random.Range(0, _1obstacles[j].transform.childCount);
+                GameObject obstacle = _1obstacles[j].transform.GetChild(randomIndex).gameObject;
+                Instantiate(obstacle, transform.position, obstacle.transform.rotation);
+            }
+        }
         
-        GameObject newObstacle = Instantiate(obstacle, transform.position, Quaternion.identity);
+        
     }
 
 }

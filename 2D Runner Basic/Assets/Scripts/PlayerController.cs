@@ -38,8 +38,8 @@ public class PlayerController : MonoBehaviour
 
     private void Death()
     {
-        gameManager.canPlay = false;
         animationController.Death();
+        gameManager.GameFinish();
     }
     
     private void OnCollisionEnter2D(Collision2D collision)

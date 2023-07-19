@@ -28,7 +28,7 @@ public class ObstacleController : MonoBehaviour
 
     private void Move()
     {
-        transform.Translate(Vector3.left * obstacleSpeed * Time.deltaTime);
+        transform.Translate(Vector3.left * obstacleSpeed * Time.deltaTime,Space.Self);
     }
 
     private void Destroy()
