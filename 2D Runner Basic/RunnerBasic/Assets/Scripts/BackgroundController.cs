@@ -32,7 +32,7 @@ public class BackgroundController : MonoBehaviour
         if (transform.position.x <= -19)
         {
             BoxCollider2D collider2D = GetComponent<BoxCollider2D>();
-            transform.Translate(Vector3.right * collider2D.size.x * transform.localScale.x * 2);
+            transform.Translate(Vector3.right * collider2D.size.x * transform.localScale.x * 3);
         }
     }
 }
