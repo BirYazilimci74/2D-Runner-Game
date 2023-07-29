@@ -29,7 +29,7 @@ public class BackgroundController : MonoBehaviour
     private void BackgroundRepeat()
     {
         //Bir arkaplan cameradan çıktığında boyutunun 2 katı kadar ileri git.
-        if (transform.position.x <= -19)
+        if (transform.position.x <= -23)
         {
             BoxCollider2D collider2D = GetComponent<BoxCollider2D>();
             transform.Translate(Vector3.right * collider2D.size.x * transform.localScale.x * 3);
